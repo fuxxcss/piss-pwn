@@ -9,3 +9,7 @@ Off-by-one
 3.
 Format strings
 Heap struct exploitation
+
+First-generation stack overflow occurs when calling functions such as strcpy(), gets(), sprintf(), etc., without checking for bounds. 
+Second-generation overflow occurs when calling strncat(), strncpy(), which, despite checking the copy size, can still cause off-by-one by overwriting the terminator.
+Three generations of format string and heap explosions.Format string vulnerabilities are caused by incorrect use of the *printf() family function; Heap utilization is caused by the malloc()/free() functions that are strongly associated with libc.
