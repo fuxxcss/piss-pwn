@@ -1,0 +1,11 @@
+< Third Generation Exploitation >
+proposed by Halvar Flake
+1.
+Simple stack smashes
+Code Injection Attack
+Return Oriented Programming，ROP
+2.
+Off-by-one
+3.
+Format strings
+Heap struct exploitation
