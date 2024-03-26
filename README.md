@@ -2,9 +2,9 @@
 Some pwn samples and exps.
 
 We use libpwntools, the makefile required for compilation is:
-————————————————————————————————————————————————————————————
+```makefile
 all：
         g++ exp.cpp -o exp -pthread -lpwntools -std=c++17
 clean:
         exp
-————————————————————————————————————————————————————————————
+```
