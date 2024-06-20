@@ -1,6 +1,8 @@
-# pwn-exercises
-Some pwn samples and exps.
+## pwnies
+#fuzz
+we use libAFL/AFL/AFL++
 
+#exploit
 We use libpwntools, the makefile required for compilation is:
 ```makefile
 all：
